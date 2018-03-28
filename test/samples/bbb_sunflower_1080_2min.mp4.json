@@ -1,0 +1,17 @@
+[
+  {
+    "path": "slo_segments/bbb_sunflower_1080_2min_001.mp4",
+    "etag": "07b81cd438af5097d584321ab99cdc06",
+    "size_bytes": 10485760
+  },
+  {
+    "path": "slo_segments/bbb_sunflower_1080_2min_002.mp4",
+    "etag": "ff53521cfdfe801ab1e52d0e7fda4969",
+    "size_bytes": 10485760
+  },
+  {
+    "path": "slo_segments/bbb_sunflower_1080_2min_003.mp4",
+    "etag": "e924eaf1e2171ff355c588fa84da5778",
+    "size_bytes": 6911647
+  }
+]
