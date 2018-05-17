@@ -62,9 +62,18 @@ class ProxySatelliteMiddleware(WSGIContext):
     def __call__(self, env, start_response):
         if time() > self._rtime:
             self._reload()
+
         req = Request(env)
         account = env.get('HTTP_X_AUTH_USER')
         token = env.get('HTTP_X_AUTH_TOKEN', env.get('HTTP_X_STORAGE_TOKEN'))
+
+        self.logger.info('req.method: %s' % (req.method))
+        if req.method == "GET" or req.method == "DELETE":
+            req.headers.update({'Content-Type':''})
+            self.logger.info('When GET and DELETE, update req Content-Type is not: %s' % ('None'))
+
+        for key, value in env.iteritems():
+            self.logger.info('env key:value %s:%s' % (key, value))
         # 2nd request will use token
         if token is None:
             # if can't get account, then try swift3
@@ -80,6 +89,7 @@ class ProxySatelliteMiddleware(WSGIContext):
                                         body="Account not in list")
                 return resp(env, start_response)
             else:
+                self.logger.info('%s is in account list and allow to get token' % account)
                 return self.app(env, start_response)
         else:
             return self.app(env, start_response)
