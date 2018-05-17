@@ -65,21 +65,31 @@ class ProxySatelliteMiddleware(WSGIContext):
         req = Request(env)
         account = env.get('HTTP_X_AUTH_USER')
         token = env.get('HTTP_X_AUTH_TOKEN', env.get('HTTP_X_STORAGE_TOKEN'))
+
+        # check only 1st request
         # 2nd request will use token
         if token is None:
             # if can't get account, then try swift3
             if account is None:
                 s = env.get('HTTP_AUTHORIZATION')
+                #self.logger.info('s is %' % s)
                 x = [x.strip() for x in s.split(':')]
                 y = str(x[0]).split(' ')
+                #self.logger.info('y[0] is %' % str(y[0]))
                 if y[0] == "AWS":
                     account = y[1]
+                    #self.logger.info('account for S3 v2 is %' % account)
+                elif y[0] == "AWS4-HMAC-SHA256":
+                    z = str(y[1].split("Credential=")[1])
+                    account = z.split("/")[0]
+                    #self.logger.info('account for S3 v4 is %' % str(account))
             if (account not in self.account_list):
                 self.logger.info('%s is not allow to get token' % account)
                 resp = HTTPUnauthorized(request=req,
                                         body="Account not in list")
                 return resp(env, start_response)
             else:
+                self.logger.info('%s is in account list and allow to get token' % account)
                 return self.app(env, start_response)
         else:
             return self.app(env, start_response)
