@@ -1,7 +1,7 @@
-reverse deploy update for proxy-sattelite node via incron
+reverse deploy update for proxy-satellite node via incron
 ========================================
 
-#### Install incron for CentOS7
+#### Install incrond for CentOS7
 First we will need to install incron:
 ```
 $ sudo yum install incron
