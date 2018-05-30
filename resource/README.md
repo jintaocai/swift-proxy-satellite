@@ -1,17 +1,13 @@
-#### refresh deploy update for proxy-sattelite node via bash script + cron
-```
-$ ./refresh.sh /etc/swift/proxy-server.conf
-```
+reverse deploy update for proxy-sattelite node via incron
+========================================
 
-### reverse deploy update for proxy-sattelite node via incron
-
-#### setup incron
+#### Install incron for CentOS7
 First we will need to install incron:
 ```
 $ sudo yum install incron
 ```
 
-PS if your CentOS can't find the incron repo, try as below.
+###### PS if your CentOS can't find the incron repo, try as below.
 ```
 Type the following command as root user to install repo:
 # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -30,7 +26,7 @@ And now to start incron:
 $ sudo service incrond start
 ```
 
-#### configure incron
+#### Configure incron
 ```
 # incrontab -l
 no table for root
@@ -74,4 +70,11 @@ table updated
 ```
 # tail -f /var/log/cron
 May 30 11:01:46 JW-swift-demo-proxyonly incrond[24117]: (root) CMD (/opt/ss/support/reverse.sh)
+```
+
+Another solution with cron + bash script
+========================================
+refresh deploy update for proxy-sattelite node via bash script + cron
+```
+$ ./refresh.sh /etc/swift/proxy-server.conf
 ```
