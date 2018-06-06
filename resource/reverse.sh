@@ -16,3 +16,5 @@ echo "copy $b to $1"
 cp $b $a
 echo "restart proxy-server"
 systemctl restart ssswift-proxy.service
+echo "restart incrond"
+service incrond restart
