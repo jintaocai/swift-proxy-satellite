@@ -2,7 +2,7 @@
 This is a repo for filter by account list and convert endpoint FQDN via proxy mc
 
  * [x] Provide swift proxy satellite for swift RESTful API / Curl Commands.
- * [ ] Provide swift proxy satellite for amazon s3 API.
+ * [x] Provide swift proxy satellite for amazon s3 API.
 
 # Setup swift-proxy-satellite via containers
  * proxy server with ssl: https://github.com/swiftstack/swift-proxy-satellite/tree/master/container/proxy-ssl

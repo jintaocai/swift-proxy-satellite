@@ -26,6 +26,7 @@ class ProxySatelliteMiddleware(WSGIContext):
         use = egg:proxy_satellite#proxy_satellite
         account_list_path = /tmp/account_list.csv
         reload_time = 15
+    ps: you can deside your ownaccount_list_path 
     """
     def __init__(self, app, conf):
         self.app = app
